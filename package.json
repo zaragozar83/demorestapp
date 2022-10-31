@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js > prod.log &",
+    "start": "nohup node src/index.js &",
     "start:dev": "nodemon src/index.js"
   },
   "keywords": [],
