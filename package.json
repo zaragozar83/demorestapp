@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nohup node src/index.js &",
-    "start:dev": "nodemon src/index.js"
+    "start": "nohup node src/index.js &"
   },
   "keywords": [],
   "author": "",
