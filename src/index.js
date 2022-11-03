@@ -16,30 +16,22 @@ app.get("/api", (req, res) => {
 
 app.post("/api/posts", verifyToken, (req, res) => {
 
+  console.log("Reading Payload")
   console.log("************************************")
-  console.log(req.token)
-  console.log("************************************")
-  jwt.verify(req.token, "secretkey", (err, authData) => {
-    if(err) {
-      console.log(err)
-      res.sendStatus(403)
-    } else{
+  let decodeToken = JSON.parse(Buffer.from(req.token, 'base64').toString('ascii'))
 
-      console.log("Reading Payload")
-      let name = authData.data["givenName"]
-      let user = authData.data["usertype"]
-      let sn = authData.data["sn"]
-      let email = authData.data["email"]
-      let sub = authData.data["sub"]
+  let name = decodeToken["givenName"]
+  let user = decodeToken["usertype"]
+  let sn = decodeToken["sn"]
+  let email = decodeToken["email"]
+  let sub = decodeToken["sub"]
 
-      res.json({
-        name: name,
-        user: user,
-        sn: sn,
-        email: email,
-        sub: sub,
-      })
-    }
+  res.json({
+    name: name,
+    user: user,
+    sn: sn,
+    email: email,
+    sub: sub
   })
 })
 
