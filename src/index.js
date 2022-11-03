@@ -4,8 +4,32 @@ const res = require('express/lib/response')
 const app = express()
 const port = 80
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
+app.get('/:token_payload', (req, res) => {
+  
+  console.log("token_payload " + req.params.token_payload);
+  const bearerToken = req.params.token_payload
+
+  if(typeof bearerToken !== "undefined") {
+    // const bearerToken = bearerHeader.split(" ")[1];
+    let decodeToken = JSON.parse(Buffer.from(bearerToken, 'base64').toString('ascii'))
+    console.log("decodeToken ==> " + decodeToken)
+
+    let name = decodeToken["givenName"]
+    let user = decodeToken["usertype"]
+    let sn = decodeToken["sn"]
+    let email = decodeToken["email"]
+    let sub = decodeToken["sub"]
+
+    res.json({
+      name: name,
+      user: user,
+      sn: sn,
+      email: email,
+      sub: sub
+    })
+  } else{
+    res.send('Not User Context!')
+  }
 })
 
 app.get("/api", (req, res) => {
