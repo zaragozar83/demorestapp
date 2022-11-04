@@ -6,8 +6,8 @@ const port = 80
 
 app.get('/', (req, res) => {
   
-  let headerPayloadToken = req.headers["payload_token"]
-  let queryPayloadToken = req.query.payload_token
+  let headerPayloadToken = req.headers["token"]
+  let queryPayloadToken = req.query.token
 
   console.log(typeof queryPayloadToken !== "undefined")
 
