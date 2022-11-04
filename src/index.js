@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
       sub: sub
     })
   } else {
-    res.send('Not User Contex')
+    res.send('Oops!!!\n404 - PAGE NOT FOUND')
   }
 })
 
