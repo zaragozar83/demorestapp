@@ -21,13 +21,8 @@ app.get('/', (req, res) => {
     let email = decodeToken["email"]
     let sub = decodeToken["sub"]
 
-    res.json({
-      name: name,
-      user: user,
-      sn: sn,
-      email: email,
-      sub: sub
-    })
+    res.send('Welcome ' + name + '!\n' + 'Your email is: ' + email)
+    
   } else if(typeof queryPayloadToken !== "undefined"){
     let decodeToken = JSON.parse(Buffer.from(queryPayloadToken, 'base64').toString('ascii'))
     console.log("decodeToken ==> " + decodeToken)
@@ -38,13 +33,7 @@ app.get('/', (req, res) => {
     let email = decodeToken["email"]
     let sub = decodeToken["sub"]
 
-    res.json({
-      name: name,
-      user: user,
-      sn: sn,
-      email: email,
-      sub: sub
-    })
+    res.send('Welcome ' + name + '!\n' + 'Your email is: ' + email)
   } else {
     res.send('Oops!!!\n404 - PAGE NOT FOUND')
   }
