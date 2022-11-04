@@ -10,8 +10,8 @@ app.get('/', (req, res) => {
 
   console.log(typeof queryPayloadToken !== "undefined")
 
-  if(typeof headerPayloadToken !== "undefined") {
-    let decodeToken = JSON.parse(Buffer.from(headerPayloadToken, 'base64').toString('ascii'))
+  if(typeof queryPayloadToken !== "undefined") {
+    let decodeToken = JSON.parse(Buffer.from(queryPayloadToken, 'base64').toString('ascii'))
     console.log("decodeToken ==> " + decodeToken)
 
     let name = decodeToken["givenName"]
