@@ -6,7 +6,6 @@ const port = 80
 
 app.get('/', (req, res) => {
   
-  let headerPayloadToken = req.headers["token"]
   let queryPayloadToken = req.query.token
 
   console.log(typeof queryPayloadToken !== "undefined")
@@ -16,24 +15,10 @@ app.get('/', (req, res) => {
     console.log("decodeToken ==> " + decodeToken)
 
     let name = decodeToken["givenName"]
-    let user = decodeToken["usertype"]
-    let sn = decodeToken["sn"]
     let email = decodeToken["email"]
-    let sub = decodeToken["sub"]
 
     res.send('Welcome ' + name + '!\n' + 'Your email is: ' + email)
     
-  } else if(typeof queryPayloadToken !== "undefined"){
-    let decodeToken = JSON.parse(Buffer.from(queryPayloadToken, 'base64').toString('ascii'))
-    console.log("decodeToken ==> " + decodeToken)
-
-    let name = decodeToken["givenName"]
-    let user = decodeToken["usertype"]
-    let sn = decodeToken["sn"]
-    let email = decodeToken["email"]
-    let sub = decodeToken["sub"]
-
-    res.send('Welcome ' + name + '!\n' + 'Your email is: ' + email)
   } else {
     res.send('Oops!!!\n404 - PAGE NOT FOUND')
   }
