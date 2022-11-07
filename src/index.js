@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const express = require('express')
 const res = require('express/lib/response')
+const jwt_decode = require("jwt-decode")
 const app = express()
 const port = 80
 
@@ -11,14 +12,12 @@ app.get('/', (req, res) => {
   console.log(typeof queryPayloadToken !== "undefined")
 
   if(typeof queryPayloadToken !== "undefined") {
-    let decodeToken = JSON.parse(Buffer.from(queryPayloadToken, 'base64').toString('ascii'))
-    console.log("decodeToken ==> " + decodeToken)
-
-    let name = decodeToken["givenName"]
-    let email = decodeToken["email"]
+    
+    let decodeTokenJWT = jwt_decode(queryPayloadToken)
+    let name = decodeTokenJWT["givenName"]
+    let email = decodeTokenJWT["email"]
 
     res.send('Welcome ' + name + '!\n' + 'Your email is: ' + email)
-    
   } else {
     res.send('Oops!!!\n404 - PAGE NOT FOUND')
   }
